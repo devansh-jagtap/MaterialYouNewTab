@@ -2406,26 +2406,57 @@ body[data-bg="wallpaper"] .searchWithCont .hint:hover {
 .quotesContainer {
 	position: relative;
 	background-color: var(--accentLightTint-blue);
-	height: 100px;
+	min-height: 100px;
 	width: 100%;
 	border-radius: 20px;
 	padding: 20px;
+	padding-bottom: 30px;
 	line-height: 28px;
 }
-
 .authorWrapper {
 	position: absolute;
-	bottom: 0;
-	inset-inline-end: 0;
+	bottom: -1px;
+	inset-inline-end: -1px;
 	display: flex;
 	align-items: flex-end;
 	background: var(--bg-color-blue);
-    border-start-start-radius: 20px;
-	border-end-end-radius: 20px; 
+	border-start-start-radius: 20px;
+	border-end-end-radius: 20px;
+}
+
+.authorWrapper::before {
+	content: "";
+	position: absolute;
+	inset-inline-start: -20px;
+	bottom: 0;
+	width: 21px;
+	height: 21px;
+	background: radial-gradient(circle at 0 0, transparent 19.5px, var(--bg-color-blue) 20px);
+	pointer-events: none;
+}
+
+
+.authorWrapper::after {
+	content: "";
+	position: absolute;
+	inset-inline-end: 0;
+	top: -20px;
+	width: 21px;
+	height: 21px;
+	background: radial-gradient(circle at 0 0, transparent 19.5px, var(--bg-color-blue) 20px);
+	pointer-events: none;
+}
+
+:dir(rtl) .authorWrapper::before {
+	background: radial-gradient(circle at 100% 0, transparent 19.5px, var(--bg-color-blue) 20px);
+}
+
+:dir(rtl) .authorWrapper::after {
+	background: radial-gradient(circle at 100% 0, transparent 19.5px, var(--bg-color-blue) 20px);
 }
 
 .authorName {
-	background: var(--bg-color-blue);
+	background: transparent;
 	position: relative;
 	padding: 6px 16px;
 	display: flex;
@@ -2446,23 +2477,6 @@ body[data-bg="wallpaper"] .searchWithCont .hint:hover {
 	padding: 0;
 }
 
-.qtRounder {
-	position: absolute;
-	width: 20px;
-	height: 20px;
-	inset-inline-start: -20px;
-	transform: rotate(90deg);
-}
-
-.qtRounder2 {
-	position: absolute;
-	width: 20px;
-	height: 20px;
-	inset-inline-end: 0;
-	top: -20px;
-	transform: rotate(90deg);
-}
-
 body[data-bg="wallpaper"] .quotesContainer {
 	background-color: color-mix(
 		in srgb,
@@ -2476,7 +2490,7 @@ body[data-bg="wallpaper"] .quotesContainer {
 	text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
 }
 
-body[data-bg="wallpaper"] .authorName {
+body[data-bg="wallpaper"] .authorWrapper {
 	background-color: color-mix(
 		in srgb,
 		var(--bg-color-blue) calc(var(--transparency) * 1.5),
@@ -2484,12 +2498,22 @@ body[data-bg="wallpaper"] .authorName {
 	);
 }
 
-html[lang="ur"] .qtRounder {
-	left: -18.5px;
+body[data-bg="wallpaper"] .authorWrapper::before,
+body[data-bg="wallpaper"] .authorWrapper::after {
+	background: radial-gradient(
+		circle at 0 0,
+		transparent 19.5px,
+		color-mix(in srgb, var(--bg-color-blue) calc(var(--transparency) * 1.5), transparent) 20px
+	);
 }
 
-html[lang="ur"] .qtRounder2 {
-	right: -1.5px;
+:dir(rtl) body[data-bg="wallpaper"] .authorWrapper::before,
+:dir(rtl) body[data-bg="wallpaper"] .authorWrapper::after {
+	background: radial-gradient(
+		circle at 100% 0,
+		transparent 19.5px,
+		color-mix(in srgb, var(--bg-color-blue) calc(var(--transparency) * 1.5), transparent) 20px
+	);
 }
 
 /* ----------Shortcuts----------------- */
